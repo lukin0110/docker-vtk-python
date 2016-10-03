@@ -1,0 +1,6 @@
+app:
+    build: .
+    volumes:
+      - ./build:/transfer
+      - ./out:/out
+      - ./src:/src
