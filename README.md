@@ -1,61 +1,74 @@
-# KULeuven Project
+# Docker VTK Python image
+
+This is a Docker development image for VTK Projects with Python based 
+on Debian Wheezy x86x64. 
+
+Libraries inside:
+
+* [Python 3.4.5](https://www.python.org/)
+* [VTK 7.0.0](http://www.vtk.org/)
+* [CMake 2.8.12.2](https://cmake.org/)
+* [OpenGL](https://www.opengl.org/)
+* [Tcl 8.6.6 & Tk 8.6.6](https://www.tcl.tk/)
 
 ## Usage
 
-Build container: 
+Download:
 ```
-$ docker-compose --verbose build
+$ docker pull lukin0110/docker-vtk-python
 ```
 
 Run python shell:
 ```
-$ docker-compose run app python
+$ docker run -it lukin0110/docker-vtk-python python
 ```
 
 Run a bash shell:
 ```
-$ docker-compose run app bash
+$ docker run -it lukin0110/docker-vtk-python bash
 ```
 
-If you want to write output files (text files, JPEG's, PNG's) you'll 
-have to write to the `/out` directory in your python scripts. This 
-directory can be [mounted](https://docs.docker.com/engine/tutorials/dockervolumes/) 
-to a container.
+## Mount points
 
-## Docker image
+The container has 2 mount points:
 
-The docker image is based on python 3.4.5 and Debian wheezy. It 
-downloads all the sources of all the necessary libraries & builds them.
-Example of a [VTK Docker image](https://hub.docker.com/r/srikanthnagella/vtk-docker/~/dockerfile/).
+* `/src`: mount a local source code directory. You need this to execute your code in the container.
+* `/out`: mount a local out directory if your scripts produce output.
 
-Included libraries:
-
-* [VTK](http://www.vtk.org/)
-* [CMake](https://cmake.org/)
-* [OpenGL](https://www.opengl.org/)
-* [Tcl & Tk](https://www.tcl.tk/)
-
-The images automatically builds everything. The VTK library has Python
-bindings. The image is ready to use for development.
-
-### Build VTK with ccmake in a container
-
+Examples:
 ```
-$ docker-compose run app
-$ mkdir VTK-build
-cd VTK-build
-ccmake ../VTK-7.0.0
+$ docker run -it -v your_source:/src lukin0110/docker-vtk-python python /src/myscript.py
+$ docker run -it -v your_out:/out lukin0110/docker-vtk-python python /src/myscript.py
+
+$ docker run -it -v your_source:/src -v ./your_out:/out lukin0110/docker-vtk-python python /src/myscript.py
 ```
 
-After you have configured it:
-```
-$ make
-```
+[More info about mounting](https://docs.docker.com/engine/tutorials/dockervolumes/).
 
-More info [about configuring & building VTK](http://www.vtk.org/Wiki/VTK/Configure_and_Build)
+Note: on OSX you need to add the full path of the directory that you want to mount. 
+E.g.: `docker run -v /Users/johndoe/your_project/your_source:/src`.
 
-### Link VTK with Python
+## Examples
 
-* http://ghoshbishakh.github.io/blog/blogpost/2016/03/05/buid-vtk.html
-* http://www.vtk.org/Wiki/VTK/Tutorials/PythonEnvironmentSetup
-* https://mail.python.org/pipermail/pythonmac-sig/2004-October/011838.html
+The container has a few examples included. The examples are located in 
+the `/examples` directory.
+
+* numpy: `docker run -it lukin0110/docker-vtk-python python /examples/e_numpy.py`
+* scipy: `docker run -it lukin0110/docker-vtk-python python /examples/e_scipy.py`
+* vtk: `docker run -it lukin0110/docker-vtk-python python /examples/e_vtk.py`
+
+# License
+
+    Copyright 2016 Maarten Huijsmans
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.

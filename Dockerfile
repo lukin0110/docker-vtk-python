@@ -77,10 +77,17 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib:/vtk-build2/lib
 #
 # - /vtk-build: directory is used to build the VTK library from with a container with ccmake
 # - /out: directory is used for python to write output files (JPEG, PNG, etc)
-VOLUME ["/vtk-build", "/out"]
+#VOLUME ["/vtk-build", "/out"]
+#VOLUME ["/out"]
+
+# Create the possible mount points
+RUN mkdir /out && mkdir /src
 
 # Set the source dir as default
 WORKDIR /src
+
+# Add examples
+ADD examples /examples
 
 # Adding docker-entrypoint & configure
 ADD deployment/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
