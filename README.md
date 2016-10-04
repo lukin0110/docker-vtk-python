@@ -1,7 +1,7 @@
 # Docker VTK Python image
 
 This is a Docker development image for VTK Projects with Python based 
-on Debian Wheezy x86x64. 
+on Debian Wheezy x86_64. 
 
 Libraries inside:
 
@@ -40,12 +40,12 @@ Examples:
 $ docker run -it -v your_source:/src lukin0110/docker-vtk-python python /src/myscript.py
 $ docker run -it -v your_out:/out lukin0110/docker-vtk-python python /src/myscript.py
 
-$ docker run -it -v your_source:/src -v ./your_out:/out lukin0110/docker-vtk-python python /src/myscript.py
+$ docker run -it -v your_source:/src -v your_out:/out lukin0110/docker-vtk-python python /src/myscript.py
 ```
 
 [More info about mounting](https://docs.docker.com/engine/tutorials/dockervolumes/).
 
-Note: on OSX you need to add the full path of the directory that you want to mount. 
+**Note**: on OSX you need to add the full path of the directory that you want to mount. 
 E.g.: `docker run -v /Users/johndoe/your_project/your_source:/src`.
 
 ## Examples
