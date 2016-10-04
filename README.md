@@ -1,7 +1,7 @@
 # Docker VTK Python image
 
-This is a Docker development image for VTK Projects with Python based 
-on Debian Wheezy x86_64. 
+This is a Docker development image for [VTK](http://www.vtk.org/) 
+projects with Python based on Debian Wheezy x86_64. 
 
 Libraries inside:
 

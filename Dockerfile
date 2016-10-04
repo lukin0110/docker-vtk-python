@@ -3,7 +3,6 @@
 #
 # The container contains:python3.4.5, CMake, VTK, Tcl, Tk, OpenGL
 #
-#
 FROM python:3.4.5-wheezy
 
 # Create source & tmp build directory
