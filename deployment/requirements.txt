@@ -1,0 +1,4 @@
+# Requirements for the project
+numpy==1.11.2rc1
+scipy==0.18.1
+matplotlib==1.5.3

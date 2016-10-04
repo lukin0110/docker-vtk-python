@@ -1,1 +1,4 @@
-builds/wheezy_x86
+sources
+transfer
+vtk-build
+.git

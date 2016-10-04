@@ -1,6 +1,8 @@
 app:
     build: .
+    stdin_open: true
+    tty: true
     volumes:
-      - ./build:/transfer
-      - ./out:/out
+      - ./vtk-build:/vtk-build
+      - ./transfer:/out
       - ./src:/src
